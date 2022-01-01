@@ -12,9 +12,16 @@ function omok_field(canvars, lineCount){
 
 function setCanvas(canvars, lineCount) {
     let ctx = canvars.getContext("2d");
-    setCanvarsBackground(canvars, ctx);
-    drawLine(ctx, lineCount);
-    drawDot(ctx, lineCount);
+    if(lineCount==0){
+        canvars.width = maxWidth;
+        canvars.height = maxHeight;
+        ctx.strokeRect(0,0,700,700);
+    }
+    else{
+        setCanvarsBackground(canvars, ctx);
+        drawLine(ctx, lineCount);
+        drawDot(ctx, lineCount);
+    }
 }
 function setCanvarsBackground(canvars, ctx) {
     canvars.width = maxWidth;

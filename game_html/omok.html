@@ -8,15 +8,22 @@
     <script src="../js/omok/omok_main.js"></script>
     <script src="../js/omok/omok_field.js"></script>
 </head>
-<body onload="gameStart()">
-    <div>오목 말들꼬얌 <button onclick="test()">a</button></div>
+<body onload="gameStart(0)">
+    <div>
+        오목 말들꼬얌
+        <button onclick="test()">A</button>
+        <input type="button" onclick="gameStart(9)" value="9">
+        <input type="button" onclick="gameStart(11)" value="11">
+        <input type="button" onclick="gameStart(13)" value="13">
+        <input type="button" onclick="gameStart(19)" value="19">
+    </div>
     <div><canvas id=omok_field></canvas></div>
 </body>
 <script>
     let game = null;
-    function gameStart() {
+    function gameStart(lineCount) {
         console.log("load omok");
-        game = new omok(19);
+        game = new omok(lineCount);
     }
     function test() {
         game.test();
