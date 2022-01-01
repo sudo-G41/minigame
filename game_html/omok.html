@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오목</title>
+    <script src="../js/omok/omok_main.js"></script>
+    <script src="../js/omok/omok_field.js"></script>
+</head>
+<body onload="gameStart()">
+    <div>오목 말들꼬얌 <button onclick="test()">a</button></div>
+    <div><canvas id=omok_field></canvas></div>
+</body>
+<script>
+    let game = null;
+    function gameStart() {
+        console.log("load omok");
+        game = new omok(19);
+    }
+    function test() {
+        game.test();
+    }
+</script>
+</html>
