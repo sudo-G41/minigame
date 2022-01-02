@@ -33,7 +33,7 @@ function drawLine(ctx, lineCount) {
     ctx.beginPath();
     for(let n=0;n<lineCount;n++){
         let pos = padding+(n*gridlength);
-        console.log("Draw [n:"+n+", pos:"+pos+"]");
+        // console.log("Draw [n:"+n+", pos:"+pos+"]");
         ctx.moveTo(padding, pos);
         ctx.lineTo(length, pos);
         ctx.moveTo(pos, padding);
@@ -72,11 +72,6 @@ function omok_mouse(canvas, lineCount){
     this.lineCount = lineCount;
     this.player = true;
 }
-// function onMouseMova(event,obj){
-//     console.log("mouse event\n"+obj) ;
-//     drawCursor(event, obj);
-// }
-//테스트중
 omok_mouse.prototype.onMouseMova=function(event,obj){
     console.log("mouse event\n"+obj.lineCount);
     drawCursor(event, obj, this.canvas);
@@ -89,8 +84,7 @@ function drawCursor(event, obj, canvas){
         let pointX = event.offsetX;
         let pointY = event.offsetY;
         const stoneSize = maxfieldLength/lineCount;
-        console.log("("+pointX+","+pointY+") 돌 크기:"+stoneSize);
-        // console.log(canvas);
+        // console.log("("+pointX+","+pointY+") 돌 크기:"+stoneSize);
         obj.ctx.fillStyle = obj.player?"#000000":"#ffffff";
         obj.ctx.beginPath();
         obj.ctx.arc(pointX,pointY,stoneSize/2,0,2*Math.PI,true);
