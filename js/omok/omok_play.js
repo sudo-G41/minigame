@@ -1,31 +1,29 @@
 const maxHeight = 700;
 const maxWidth = 700;
-// const maxfieldHeight = 650;
-// const maxfieldWidth = 650;
 const maxfieldLength = 650;
 const padding = 25;
-function omok_field(canvars, lineCount){
-    this.canvars = canvars;
+function omok_field(canvas, lineCount){
+    this.canvas = canvas;
     this.lineCount = lineCount;
-    setCanvas(this.canvars, lineCount);
+    setCanvas(this.canvas, lineCount);
 }
 
-function setCanvas(canvars, lineCount) {
-    let ctx = canvars.getContext("2d");
+function setCanvas(canvas, lineCount) {
+    let ctx = canvas.getContext("2d");
     if(lineCount==0){
-        canvars.width = maxWidth;
-        canvars.height = maxHeight;
+        canvas.width = maxWidth;
+        canvas.height = maxHeight;
         ctx.strokeRect(0,0,700,700);
     }
     else{
-        setCanvarsBackground(canvars, ctx);
+        setCanvasBackground(canvas, ctx);
         drawLine(ctx, lineCount);
         drawDot(ctx, lineCount);
     }
 }
-function setCanvarsBackground(canvars, ctx) {
-    canvars.width = maxWidth;
-    canvars.height = maxHeight;
+function setCanvasBackground(canvas, ctx) {
+    canvas.width = maxWidth;
+    canvas.height = maxHeight;
     ctx.fillStyle = "#853906";
     ctx.fillRect(0,0,700,700);
 }
@@ -41,7 +39,7 @@ function drawLine(ctx, lineCount) {
         ctx.moveTo(pos, padding);
         ctx.lineTo(pos, length);
     }
-    ctx.stroke();
+    ctx.stroke()
 }
 function drawDot(ctx, lineCount){
     let sizeList = {
@@ -59,7 +57,6 @@ function drawDot(ctx, lineCount){
         9:[[4,4]]
     }
     ctx.fillStyle = "black";
-    // console.log("dict and list length"+sizeList[lineCount].length);
     for(let idxSize = 0;idxSize<sizeList[lineCount].length;idxSize++){
         ctx.beginPath();
         let pointX = padding+maxfieldLength/(lineCount-1)*sizeList[lineCount][idxSize][0];
@@ -67,5 +64,36 @@ function drawDot(ctx, lineCount){
         ctx.arc(pointX,pointY,3,0,2*Math.PI,true);
         ctx.fill();
     }
-    // let point = padding+maxfieldLength/(lineCount-1)*3;
+}
+
+function omok_mouse(canvas, lineCount){
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.lineCount = lineCount;
+    this.player = true;
+}
+// function onMouseMova(event,obj){
+//     console.log("mouse event\n"+obj) ;
+//     drawCursor(event, obj);
+// }
+//테스트중
+omok_mouse.prototype.onMouseMova=function(event,obj){
+    console.log("mouse event\n"+obj.lineCount);
+    drawCursor(event, obj, this.canvas);
+    console.log(event+"mouse event end");
+}
+function drawCursor(event, obj, canvas){
+    let lineCount = obj.lineCount;
+    if(lineCount!=0){
+        setCanvas(canvas,lineCount);
+        let pointX = event.offsetX;
+        let pointY = event.offsetY;
+        const stoneSize = maxfieldLength/lineCount;
+        console.log("("+pointX+","+pointY+") 돌 크기:"+stoneSize);
+        // console.log(canvas);
+        obj.ctx.fillStyle = obj.player?"#000000":"#ffffff";
+        obj.ctx.beginPath();
+        obj.ctx.arc(pointX,pointY,stoneSize/2,0,2*Math.PI,true);
+        obj.ctx.fill();
+    }
 }

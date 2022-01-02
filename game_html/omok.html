@@ -6,27 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목</title>
     <script src="../js/omok/omok_main.js"></script>
-    <script src="../js/omok/omok_field.js"></script>
+    <script src="../js/omok/omok_play.js"></script>
 </head>
 <body onload="gameStart(0)">
     <div>
-        오목 말들꼬얌
+        오목 만들꼬얌
         <button onclick="test()">A</button>
         <input type="button" onclick="gameStart(9)" value="9">
         <input type="button" onclick="gameStart(11)" value="11">
         <input type="button" onclick="gameStart(13)" value="13">
         <input type="button" onclick="gameStart(19)" value="19">
+        <input type="button" onclick="location.href = '/mytest/test.html'" value="?">
     </div>
-    <div><canvas id=omok_field></canvas></div>
+    <div><canvas id=omok_field
+        onmousemove="onMouseMove(event)"
+        ></canvas></div>
 </body>
 <script>
     let game = null;
     function gameStart(lineCount) {
         console.log("load omok");
         game = new omok(lineCount);
+        console.log(game);
+        // let canvars = document.getElementById("omok_field");
+        // canvars.onmousemove = onMouseMove(event);
     }
     function test() {
         game.test();
+    }
+    function onMouseMove(event){
+        console.log("mouse move html"+game.mouse);
+        game.mouse.onMouseMova(event,game.mouse);
     }
 </script>
 </html>

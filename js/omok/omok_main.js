@@ -3,8 +3,9 @@ function omok(lineSize){
     this.lineCount = line[lineSize];
     // console.log(this.lineCount);
     thisNuminLine(this.lineCount);
-    this.canvars = document.getElementById("omok_field");
-    this.field = new omok_field(this.canvars,this.lineCount);
+    this.canvas = document.getElementById("omok_field");
+    this.field = new omok_field(this.canvas,this.lineCount);
+    this.mouse = new omok_mouse(this.canvas,this.lineCount);
 }
 function thisNuminLine(num){
     console.log("line # "+num);
